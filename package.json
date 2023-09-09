@@ -16,9 +16,11 @@
     "release": "bumpp -r"
   },
   "dependencies": {
+    "gh-corners": "^1.0.8",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gh-corners": "^1.3.6",
     "uncolur": "^0.0.5"
   },
   "devDependencies": {

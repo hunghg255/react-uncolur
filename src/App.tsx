@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 
 import queryString from 'query-string';
+import { GithubCorners } from 'react-gh-corners';
 import { getColors } from 'uncolur';
 
 import { useCopy } from '@/hooks/useCopy';
@@ -63,6 +64,8 @@ function App() {
           </div>
         </>
       )}
+
+      <GithubCorners position='right' href='https://github.com/hunghg255/uncolur' />
     </div>
   );
 }
