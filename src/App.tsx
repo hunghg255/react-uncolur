@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-null */
 import './App.css';
 import { useEffect, useState } from 'react';
 
@@ -42,7 +43,7 @@ function App() {
       {colors && (
         <>
           <div className='App'>
-            <button onClick={() => copyToClipboard(JSON.stringify({ colors }))}>
+            <button onClick={() => copyToClipboard(JSON.stringify({ colors }, null, 2))}>
               {copied ? 'Copied' : 'Copy'}
             </button>
 
