@@ -63,7 +63,7 @@ function App() {
               {Object.keys(colors).map((key: string, idx: number) => {
                 return (
                   <div
-                    key={key}
+                    key={`t-${key}-${Math.random()}`}
                     style={{
                       backgroundColor: colors[key],
                     }}
@@ -88,7 +88,7 @@ function App() {
                 {coloAnt.map((key: string, idx: number) => {
                   return (
                     <div
-                      key={key}
+                      key={`a-${key}-${Math.random()}`}
                       style={{
                         backgroundColor: key,
                       }}
@@ -114,7 +114,7 @@ function App() {
                 {coloAntDark.map((key: string, idx: number) => {
                   return (
                     <div
-                      key={key}
+                      key={`ad-${key}-${Math.random()}`}
                       style={{
                         backgroundColor: key,
                       }}
