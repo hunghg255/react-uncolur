@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 
 import queryString from 'query-string';
 import { GithubCorners } from 'react-gh-corners';
-import { getColors } from 'uncolur';
+import { getColorsTailwindcss, getColorsAntd } from 'uncolur';
 
 import { useCopy } from '@/hooks/useCopy';
 
 function App() {
   const [colors, setColors] = useState<any>();
+  const [coloAnt, setColorsAnt] = useState<any>();
+  const [coloAntDark, setColorsAntDark] = useState<any>();
   const { copied, copyToClipboard } = useCopy();
 
   useEffect(() => {
@@ -19,15 +21,23 @@ function App() {
       return;
     }
 
-    const c = getColors(parsed.color);
+    const c = getColorsTailwindcss(parsed.color);
+    const c1 = getColorsAntd(parsed.color);
+    const c2 = getColorsAntd(parsed.color, { theme: 'dark' });
 
     setColors(c);
+    setColorsAnt(c1);
+    setColorsAntDark(c2);
   }, []);
 
   const onChange = (e: any) => {
-    const c = getColors(e.target.value.slice(1));
+    const c = getColorsTailwindcss(e.target.value.slice(1));
+    const c1 = getColorsAntd(e.target.value.slice(1));
+    const c2 = getColorsAntd(e.target.value.slice(1), { theme: 'dark' });
 
     setColors(c);
+    setColorsAnt(c1);
+    setColorsAntDark(c2);
 
     window.history.pushState({}, '', `?color=${e.target.value.slice(1)}`);
   };
@@ -43,6 +53,8 @@ function App() {
       {colors && (
         <>
           <div className='App'>
+            <h2>TailwindCSS</h2>
+
             <button onClick={() => copyToClipboard(JSON.stringify({ colors }, null, 2))}>
               {copied ? 'Copied' : 'Copy'}
             </button>
@@ -63,6 +75,58 @@ function App() {
               })}
             </div>
           </div>
+          <br />
+          <br />
+          {coloAnt && (
+            <div className='App'>
+              <h2>Ant Design</h2>
+              <button onClick={() => copyToClipboard(JSON.stringify({ colors }, null, 2))}>
+                {copied ? 'Copied' : 'Copy'}
+              </button>
+
+              <div className='colors'>
+                {coloAnt.map((key: string, idx: number) => {
+                  return (
+                    <div
+                      key={key}
+                      style={{
+                        backgroundColor: key,
+                      }}
+                    >
+                      <div></div>
+                      <div style={{ color: idx > 4 ? 'white' : 'black' }}>{key}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          <br />
+          <br />
+          {coloAntDark && (
+            <div className='App'>
+              <h2>Ant Design Dark</h2>
+              <button onClick={() => copyToClipboard(JSON.stringify({ colors }, null, 2))}>
+                {copied ? 'Copied' : 'Copy'}
+              </button>
+
+              <div className='colors'>
+                {coloAntDark.map((key: string, idx: number) => {
+                  return (
+                    <div
+                      key={key}
+                      style={{
+                        backgroundColor: key,
+                      }}
+                    >
+                      <div></div>
+                      <div style={{ color: idx < 5 ? 'white' : 'black' }}>{key}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </>
       )}
 
